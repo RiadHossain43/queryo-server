@@ -8,6 +8,6 @@ namespace server.Data
         Comment GetComment(int id);
         Comment AddComment(Comment comment);
         Comment UpdateComment(Comment comment);
-        Comment DeleteComment(int id);
+        void DeleteComment(int id);
     }
 }

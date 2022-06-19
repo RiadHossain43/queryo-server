@@ -12,27 +12,35 @@ namespace server.Data
 
         public Comment AddComment(Comment comment)
         {
-            throw new NotImplementedException();
-        }
-
-        public Comment DeleteComment(int id)
-        {
-            throw new NotImplementedException();
+            _applicationDbContext.Comments.Add(comment);
+            _applicationDbContext.SaveChanges();
+            return comment;
         }
 
         public Comment GetComment(int id)
         {
-            throw new NotImplementedException();
+            return _applicationDbContext.Comments.Find(id);
         }
 
         public List<Comment> GetComments()
         {
-            throw new NotImplementedException();
+            return _applicationDbContext.Comments.ToList();
         }
 
         public Comment UpdateComment(Comment comment)
         {
-            throw new NotImplementedException();
+            _applicationDbContext.Comments.Update(comment);
+            _applicationDbContext.SaveChanges();
+            return comment;
+        }
+        public void DeleteComment(int id)
+        {
+            var comment = _applicationDbContext.Comments.Find(id);
+            if (comment != null)
+            {
+                _applicationDbContext.Comments.Remove(comment);
+                _applicationDbContext.SaveChanges();
+            }
         }
     }
 }

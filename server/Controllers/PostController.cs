@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using server.Data;
+using server.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,29 +22,46 @@ namespace server.Controllers
             return Ok(_postData.GetPosts());
         }
 
-        // GET api/<PostController>/5
+        // GET api/<PostController>/5s
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult GetPost(int id)
         {
-            return "value";
+            var post = _postData.GetPost(id);
+            return Ok(post);
         }
 
         // POST api/<PostController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult AddPost(Post post)
         {
+            if (post != null)
+            {
+                var postData = _postData.AddPost(post);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         // PUT api/<PostController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult UpdatePost(int id, Post post)
         {
+            if (post != null)
+            {
+                post.Id = id;
+                post.EditedDate = DateTime.Now;
+                post = _postData.UpdatePost(post);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         // DELETE api/<PostController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult DeletePost(int id)
         {
+            _postData.DeletePost(id);
+            return Ok();
         }
     }
 }

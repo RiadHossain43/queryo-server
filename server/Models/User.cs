@@ -1,16 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace server.Models
 {
     public class User
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         [StringLength(25, MinimumLength = 5)]
         public string Name { get; set; }
         [Required]
-        public int Email { get; set; }
+        public string Email { get; set; }
         [Required]
         [StringLength(int.MaxValue, MinimumLength = 10)]
         public int Password { get; set; }

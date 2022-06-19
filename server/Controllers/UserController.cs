@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using server.Data;
+using server.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,54 @@ namespace server.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private IUserData _userData;
+        public UserController(IUserData userData)
+        {
+            _userData = userData;
+        }
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetUsers()
         {
-            return new string[] { "value1", "value2" };
+            var users = _userData.GetUsers();
+            return Ok(users);
         }
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult GetUser(int id)
         {
-            return "value";
+            var user = _userData.GetUserById(id);
+            return Ok(user);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult AddUser(User user)
         {
+            _userData.AddUser(user);
+            return Ok();
         }
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult UpdateUser(int id, User user)
         {
+            if (user != null)
+            {
+                user.Id = id;
+                user = _userData.UpdateUser(user);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult DeleteUser(int id)
         {
+            _userData.DeleteUser(id);
+            return Ok();
         }
     }
 }
