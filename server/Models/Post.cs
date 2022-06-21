@@ -23,5 +23,8 @@ namespace server.Models
         public DateTime EditedDate { get; set; }
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
+        [Required]
+        [ForeignKey("User")]
+        public int CreatedBy { get; set; }
     }
 }

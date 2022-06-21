@@ -35,8 +35,8 @@ namespace server.Controllers
         [HttpPost]
         public IActionResult AddComment(Comment comment)
         {
-            _commentData.AddComment(comment);
-            return Ok();
+           comment = _commentData.AddComment(comment);
+            return Ok(comment);
         }
 
         // PUT api/<CommentController>/5
@@ -47,7 +47,7 @@ namespace server.Controllers
             {
                 comment.Id = id;
                 comment = _commentData.UpdateComment(comment);
-                return Ok();
+                return Ok(comment);
             }
             return BadRequest();
         }

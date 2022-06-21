@@ -36,8 +36,8 @@ namespace server.Controllers
         {
             if (post != null)
             {
-                var postData = _postData.AddPost(post);
-                return Ok();
+                post = _postData.AddPost(post);
+                return Ok(post);
             }
             return BadRequest();
         }
@@ -51,7 +51,7 @@ namespace server.Controllers
                 post.Id = id;
                 post.EditedDate = DateTime.Now;
                 post = _postData.UpdatePost(post);
-                return Ok();
+                return Ok(post);
             }
             return BadRequest();
         }
