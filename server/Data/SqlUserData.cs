@@ -18,7 +18,7 @@ namespace server.Data
 
         public User GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            return _applicationDbContext.Users.Where(user=>user.Email.Equals(email)).First();
         }
 
         public User GetUserById(int id)

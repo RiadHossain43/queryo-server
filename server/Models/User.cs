@@ -15,7 +15,7 @@ namespace server.Models
         public string Email { get; set; }
         [Required]
         [StringLength(int.MaxValue, MinimumLength = 10)]
-        public int Password { get; set; }
+        public string Password { get; set; }
         public int Reputation { get; set; }
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.Now;

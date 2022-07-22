@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using server.Data;
 using server.Models;
+using server.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -28,7 +31,16 @@ namespace server.Controllers
         public IActionResult GetUser(int id)
         {
             var user = _userData.GetUserById(id);
-            return Ok(user);
+            if(user!=null)
+                return Ok(user);
+            return BadRequest();
+        }
+
+        // PUT api/<UserController>/authenticate
+        [HttpPost("authenticate")]
+        public IActionResult AuthenticateUser(User user)
+        {
+            return Ok();
         }
 
         // POST api/<UserController>
@@ -36,7 +48,7 @@ namespace server.Controllers
         public IActionResult AddUser(User user)
         {
             _userData.AddUser(user);
-            return Ok();
+            return Ok(user);
         }
 
         // PUT api/<UserController>/5
@@ -47,7 +59,7 @@ namespace server.Controllers
             {
                 user.Id = id;
                 user = _userData.UpdateUser(user);
-                return Ok();
+                return Ok(user);
             }
             return BadRequest();
         }

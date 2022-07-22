@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using server.Data;
 using server.Models;
 
@@ -15,6 +16,7 @@ namespace server.Controllers
         {
             _commentData = commentData;
         }
+
         // GET: api/<CommentController>
         [HttpGet]
         public IActionResult GetComments()
@@ -32,6 +34,7 @@ namespace server.Controllers
         }
 
         // POST api/<CommentController>
+        [Authorize]
         [HttpPost]
         public IActionResult AddComment(Comment comment)
         {
@@ -40,6 +43,7 @@ namespace server.Controllers
         }
 
         // PUT api/<CommentController>/5
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult UpdateComment(int id, Comment comment)
         {
@@ -53,6 +57,7 @@ namespace server.Controllers
         }
 
         // DELETE api/<CommentController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeleteComment(int id)
         {

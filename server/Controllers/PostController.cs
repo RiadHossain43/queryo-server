@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using server.Data;
 using server.Models;
 
@@ -31,6 +32,7 @@ namespace server.Controllers
         }
 
         // POST api/<PostController>
+        [Authorize]
         [HttpPost]
         public IActionResult AddPost(Post post)
         {
@@ -43,6 +45,7 @@ namespace server.Controllers
         }
 
         // PUT api/<PostController>/5
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult UpdatePost(int id, Post post)
         {
@@ -57,6 +60,7 @@ namespace server.Controllers
         }
 
         // DELETE api/<PostController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult DeletePost(int id)
         {
