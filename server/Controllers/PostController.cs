@@ -23,6 +23,13 @@ namespace server.Controllers
             return Ok(_postData.GetPosts());
         }
 
+        // GET: api/<PostController>
+        [HttpGet("answers/{id}")]
+        public IActionResult GetPostsByRefId(int id)
+        {
+            return Ok(_postData.GetPostsByRefId(id));
+        }
+
         // GET api/<PostController>/5s
         [HttpGet("{id}")]
         public IActionResult GetPost(int id)

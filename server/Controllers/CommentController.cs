@@ -24,6 +24,13 @@ namespace server.Controllers
             var comments = _commentData.GetComments();
             return Ok(comments);
         }
+        // GET: api/<CommentController>
+        [HttpGet("post/{id}")]
+        public IActionResult GetCommentsByPost(int id)
+        {
+            var comments = _commentData.GetCommentsByPost(id);
+            return Ok(comments);
+        }
 
         // GET api/<CommentController>/5
         [HttpGet("{id}")]

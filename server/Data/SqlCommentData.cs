@@ -26,6 +26,10 @@ namespace server.Data
         {
             return _applicationDbContext.Comments.ToList();
         }
+        public List<Comment> GetCommentsByPost(int id)
+        {
+            return _applicationDbContext.Comments.Where(comment=>comment.PostId==id).ToList();
+        }
 
         public Comment UpdateComment(Comment comment)
         {

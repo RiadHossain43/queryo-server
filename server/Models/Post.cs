@@ -26,5 +26,6 @@ namespace server.Models
         [Required]
         [ForeignKey("User")]
         public int CreatedBy { get; set; }
+        public int RefPostId { get; set; }
     }
 }

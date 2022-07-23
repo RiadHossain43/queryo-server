@@ -17,7 +17,11 @@ namespace server.Data
         }
         public List<Post> GetPosts()
         {
-            return _applicationDbContext.Posts.ToList();
+            return _applicationDbContext.Posts.Where(post => post.Type == "Question").ToList();
+        }
+        public List<Post> GetPostsByRefId(int id)
+        {
+            return _applicationDbContext.Posts.Where(post=>post.RefPostId==id).ToList();
         }
         public Post GetPost(int id)
         {
