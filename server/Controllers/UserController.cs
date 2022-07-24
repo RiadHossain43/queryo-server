@@ -8,7 +8,6 @@ using server.Services;
 
 namespace server.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -52,6 +51,7 @@ namespace server.Controllers
         }
 
         // PUT api/<UserController>/5
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, User user)
         {
@@ -63,7 +63,7 @@ namespace server.Controllers
             }
             return BadRequest();
         }
-
+        [Authorize]
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)

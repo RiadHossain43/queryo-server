@@ -12,9 +12,11 @@ namespace server.Controllers
     public class AuthController : ControllerBase
     {
         private IjwtAuthManager _jwtAuthManager;
-        public AuthController(IjwtAuthManager jwtAuthManager)
+        private IUserData _userData;
+        public AuthController(IjwtAuthManager jwtAuthManager,IUserData userData)
         {
             _jwtAuthManager = jwtAuthManager;
+            _userData = userData;
         }
 
         // POST api/<AuthController>
@@ -22,7 +24,8 @@ namespace server.Controllers
         [HttpPost]
         public IActionResult AuthUser(UserCred user)
         {
-            var token = _jwtAuthManager.Authenticate(user.Email,user.Password);
+            var _user = _userData.GetUserByEmail(user.Email);
+            var token = _jwtAuthManager.Authenticate(_user.Email, _user.Name,_user.Id);
             return Ok(token);
         }
     }

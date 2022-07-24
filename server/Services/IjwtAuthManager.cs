@@ -2,6 +2,6 @@
 {
     public interface IjwtAuthManager
     {
-        string Authenticate(string email, string password);
+        string Authenticate(string email, string name,int id);
     }
 }
